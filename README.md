@@ -19,6 +19,8 @@
 
 ## Introduction
 
+GaussianDream is a feed-forward 3D Gaussian world model for robotic manipulation. The core implementation lives under the `gaussiandream` Python package, while legacy checkpoint/config identifiers and external asset paths are kept compatible with upstream OpenPI releases.
+
 <div align="center">
 <img src="assets/illustration/comparation_3.png" />
 </div>
@@ -29,6 +31,80 @@
 <img src="assets/illustration/framework_final_v.drawio.png" />
 </div>
 
+## Installation
+
+```bash
+git clone https://github.com/TuojingAI/GaussianDream.git
+cd GaussianDream
+git submodule update --init --recursive
+uv sync
+```
+
+The package metadata and implementation import namespace are both `gaussiandream`.
+
+Optional cache paths:
+
+```bash
+export GAUSSIANDREAM_DATA_HOME=<CACHE_DIR>
+export CHECKPOINT_DIR=<CHECKPOINT_DIR>
+export DATA_ROOT=<DATA_ROOT>
+```
+
+`OPENPI_DATA_HOME` is still supported as a fallback for users with existing caches.
+
+## Evaluation tracks
+
+GaussianDream includes three evaluation paths:
+
+- real-robot / runtime clients built around the shared policy server and `openpi-client`
+- LIBERO simulation evaluation in `examples/libero/`
+- RoboCasa simulation evaluation in `examples/robocasa/`
+
+Start a policy server from a checkpoint:
+
+```bash
+uv run scripts/serve_policy.py \
+  --port 8010 \
+  policy:checkpoint \
+  --policy.config gaussiandream_libero \
+  --policy.dir <CHECKPOINT_DIR>/<config>/<exp>/<step>
+```
+
+For RoboCasa checkpoints, use `--policy.config gaussiandream_robocasa` and a matching checkpoint directory.
+
+### LIBERO
+
+See `examples/libero/README.md` for setup and evaluation commands.
+
+Typical flow:
+
+```bash
+uv run scripts/serve_policy.py --env LIBERO
+python examples/libero/main.py --args.task-suite-name libero_10
+```
+
+### RoboCasa
+
+See `examples/robocasa/README.md` for conda setup, RoboCasa assets, and rollout commands.
+
+Typical flow:
+
+```bash
+uv run scripts/serve_policy.py \
+  --port 8010 \
+  policy:checkpoint \
+  --policy.config gaussiandream_robocasa \
+  --policy.dir <CHECKPOINT_DIR>/<config>/<exp>/<step>
+
+python examples/robocasa/main.py \
+  --host 127.0.0.1 \
+  --port 8010 \
+  --env-name PnPCounterToCab \
+  --prompt "pick and place from counter to cabinet"
+```
+
+For RoboCasa H50 temporal evaluation, use `examples/robocasa/eval_h50_temporal.py` after installing the RoboCasa client environment.
+
 ## Experiments
 
 <div align="center">
@@ -37,11 +113,15 @@
 <img src="assets/illustration/piper_setup_2.drawio.png" />
 </div>
 
-## 📧 Contact
+## Release status
+
+Paper, checkpoints, datasets, and complete reproduction instructions are coming soon. Large artifacts such as datasets, checkpoints, rendered videos, logs, and experiment outputs are intentionally not tracked in git.
+
+## Contact
 
 If you have any question, please email zijianzhang821@gmail.com.
 
-## 📜 Sincere Acknowledgement
+## Sincere Acknowledgement
 
 Appreciate the following works for their great contributions:
 

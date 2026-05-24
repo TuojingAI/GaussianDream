@@ -1,0 +1,43 @@
+# Run with:
+# docker compose -f examples/simple_client/compose.yml up --build
+services:
+  runtime:
+    image: simple_client
+    depends_on:
+      - gaussiandream_server
+    build:
+      context: ../..
+      dockerfile: examples/simple_client/Dockerfile
+    init: true
+    tty: true
+    network_mode: host
+    volumes:
+      - $PWD:/app
+    environment:
+      - SERVER_ARGS  
+
+  gaussiandream_server:
+    image: gaussiandream_server
+    build:
+      context: ../..
+      dockerfile: examples/simple_client/Dockerfile
+    init: true
+    tty: true
+    network_mode: host
+    command: /bin/bash -c "source /.venv/bin/activate && python scripts/serve_policy.py $SERVER_ARGS"
+    volumes:
+      - $PWD:/app
+      - ${GAUSSIANDREAM_DATA_HOME:-~/.cache/gaussiandream}:/gaussiandream_assets
+    environment:
+      - SERVER_ARGS
+      - GAUSSIANDREAM_DATA_HOME=/gaussiandream_assets
+      - IS_DOCKER=true
+
+    # Comment out this block if not running on a machine with GPUs.
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

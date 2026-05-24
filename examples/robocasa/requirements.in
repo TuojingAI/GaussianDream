@@ -1,0 +1,18 @@
+# 基础依赖，参考 libero 但稍微放宽
+numpy>=1.23.3  # Robocasa 要求较高版本
+mujoco>=3.2.0
+scipy
+pygame
+Pillow
+opencv-python
+pyyaml
+pynput
+tqdm
+termcolor
+imageio
+h5py
+lxml
+hidapi
+tianshou==0.4.10
+
+robosuite>=1.5.0
