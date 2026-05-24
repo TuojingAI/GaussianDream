@@ -21,14 +21,10 @@
 
 GaussianDream is a feed-forward 3D Gaussian world model for robotic manipulation. The core implementation lives under the `gaussiandream` Python package, while legacy checkpoint/config identifiers and external asset paths are kept compatible with upstream OpenPI releases.
 
-<div align="center">
-<img src="assets/illustration/comparation_3.png" />
-</div>
-
 ## Framework
 
 <div align="center">
-<img src="assets/illustration/framework_final_v.drawio.png" />
+<img src="assets/illustration/framework_final.png" />
 </div>
 
 ## Installation
@@ -106,12 +102,6 @@ python examples/robocasa/main.py \
 For RoboCasa H50 temporal evaluation, use `examples/robocasa/eval_h50_temporal.py` after installing the RoboCasa client environment.
 
 ## Experiments
-
-<div align="center">
-<img src="assets/illustration/q_vis.drawio.png" />
-<br>
-<img src="assets/illustration/piper_setup_2.drawio.png" />
-</div>
 
 ## Release status
 
