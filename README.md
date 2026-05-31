@@ -4,10 +4,12 @@
   <small>🔥 We would appreciate it if you could star GaussianDream ⭐ and share it. Thanks! 🔥</small>
 </p>
 
-> Zijian Zhang<sup>2,3,1,&#42;</sup>, Yuqing Jiang<sup>2,3,1,&#42;</sup>, Qian Cheng<sup>4</sup>, Xiaofan Li<sup>5</sup>, Si Liu<sup>6</sup>, Ding Zhao<sup>7</sup>, Ping Luo<sup>8</sup>, Weitao Zhou<sup>4</sup>, Haibao Yu<sup>8,1,#</sup> <br>
-> <sup>1</sup> Tuojing Intelligence, <sup>2</sup> University of Chinese Academy of Sciences, <sup>3</sup> Institute of Automation, Chinese Academy of Sciences <br>
-> <sup>4</sup> Tsinghua University, <sup>5</sup> Zhejiang University, <sup>6</sup> Beihang University, <sup>7</sup> Carnegie Mellon University, <sup>8</sup> The University of Hong Kong <br>
-> <sup>&#42;</sup> Equal contribution, <sup>#</sup> Corresponding author
+<p align="center">
+  Zijian Zhang<sup>2,3,1,&#42;</sup>, Yuqing Jiang<sup>2,3,1,&#42;</sup>, Qian Cheng<sup>4</sup>, Xiaofan Li<sup>5</sup>, Si Liu<sup>6</sup>, Ding Zhao<sup>7</sup>, Ping Luo<sup>8</sup>, Weitao Zhou<sup>4</sup>, Haibao Yu<sup>8,1,#</sup><br>
+  <sup>1</sup> Tuojing Intelligence &nbsp;|&nbsp; <sup>2</sup> University of Chinese Academy of Sciences &nbsp;|&nbsp; <sup>3</sup> Institute of Automation, Chinese Academy of Sciences<br>
+  <sup>4</sup> Tsinghua University &nbsp;|&nbsp; <sup>5</sup> Zhejiang University &nbsp;|&nbsp; <sup>6</sup> Beihang University &nbsp;|&nbsp; <sup>7</sup> Carnegie Mellon University &nbsp;|&nbsp; <sup>8</sup> The University of Hong Kong<br>
+  <sup>&#42;</sup> Equal contribution &nbsp;|&nbsp; <sup>#</sup> Corresponding author
+</p>
 
 <p align="center">
 
