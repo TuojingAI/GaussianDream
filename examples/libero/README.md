@@ -1,4 +1,4 @@
-# LIBERO Evaluation
+# LIBERO Training and Evaluation
 
 This directory contains the GaussianDream LIBERO evaluation clients and robustness scripts. LIBERO remains the benchmark name; GaussianDream uses the OpenPI-derived policy server internally for checkpoint loading and inference.
 
@@ -45,6 +45,45 @@ uv run scripts/serve_policy.py \
 ```
 
 Legacy config names such as `pi05_libero` are still supported for existing checkpoints.
+
+## LIBERO training
+
+Set the dataset and pretrained-weight paths in the main GaussianDream environment:
+
+```bash
+export LIBERO_DATA_WITH_DEPTH_ROOT=<LIBERO_DATA_WITH_DEPTH_ROOT>
+export LIBERO_FLOW_ROOT=<LIBERO_FLOW_ROOT>
+export GAUSSIANDREAM_PRETRAINED_DIR=<PRETRAINED_MODEL_DIR>
+```
+
+Compute normalization statistics once before the first run:
+
+```bash
+uv run scripts/compute_norm_stats.py --config-name gaussiandream_libero
+```
+
+Train with the PyTorch entrypoint:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 uv run scripts/train_pytorch.py \
+  gaussiandream_libero \
+  --exp-name gaussiandream_libero_run
+```
+
+For multi-GPU training on one node:
+
+```bash
+CUDA_VISIBLE_DEVICES=0,1 torchrun --standalone --nnodes=1 --nproc_per_node=2 \
+  scripts/train_pytorch.py \
+  gaussiandream_libero \
+  --exp-name gaussiandream_libero_run
+```
+
+Checkpoints are written under:
+
+```bash
+checkpoints/gaussiandream_libero/gaussiandream_libero_run/
+```
 
 ## LIBERO rollout
 

@@ -1,4 +1,4 @@
-# RoboCasa Evaluation
+# RoboCasa Training and Evaluation
 
 This directory contains the RoboCasa rollout clients for GaussianDream policy servers. RoboCasa and robosuite run in a separate client environment, while the policy server runs from the main GaussianDream environment.
 
@@ -52,6 +52,52 @@ python -c "import mujoco, robocasa, robosuite, gaussiandream_client, tyro; print
 
 ```bash
 python examples/robocasa/check_env.py
+```
+
+## RoboCasa training
+
+In the main GaussianDream environment, set the dataset root and pretrained-weight path:
+
+```bash
+export ROBOCASA_H50_ROOT=<ROBOCASA_H50_ROOT>
+export GAUSSIANDREAM_PRETRAINED_DIR=<PRETRAINED_MODEL_DIR>
+```
+
+Compute normalization statistics once before training:
+
+```bash
+uv run scripts/compute_norm_stats.py --config-name gaussiandream_robocasa
+```
+
+Start training with the PyTorch trainer:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 uv run scripts/train_pytorch.py \
+  gaussiandream_robocasa \
+  --exp-name gaussiandream_robocasa_run
+```
+
+For multi-GPU training on one node:
+
+```bash
+CUDA_VISIBLE_DEVICES=0,1 torchrun --standalone --nnodes=1 --nproc_per_node=2 \
+  scripts/train_pytorch.py \
+  gaussiandream_robocasa \
+  --exp-name gaussiandream_robocasa_run
+```
+
+This config is currently initialized from:
+
+```bash
+$GAUSSIANDREAM_PRETRAINED_DIR/pi05_libero.safetensors
+```
+
+So the intended workflow is to prepare the LIBERO initialization checkpoint first, then fine-tune RoboCasa.
+
+Checkpoints are written under:
+
+```bash
+checkpoints/gaussiandream_robocasa/gaussiandream_robocasa_run/
 ```
 
 ## Single-task rollout evaluation

@@ -1,39 +1,31 @@
-## :book: GaussianDream: A Feed-Forward 3D Gaussian World Model for Robotic Manipulation
-
+<br>
 <p align="center">
-  <small>🔥 We would appreciate it if you could star GaussianDream ⭐ and share it. Thanks! 🔥</small>
-</p>
-
-<p align="center">
-  <strong>
-    Zijian Zhang<sup>2,3,1,*</sup> &nbsp;|&nbsp;
-    Yuqing Jiang<sup>2,3,1,*</sup> &nbsp;|&nbsp;
-    Qian Cheng<sup>4</sup> &nbsp;|&nbsp;
-    Xiaofan Li<sup>5</sup> &nbsp;|&nbsp;
-    Si Liu<sup>6</sup> &nbsp;|&nbsp;
-    Ding Zhao<sup>7</sup> &nbsp;|&nbsp;
-    Ping Luo<sup>8</sup> &nbsp;|&nbsp;
-    Weitao Zhou<sup>4</sup> &nbsp;|&nbsp;
+  <h1 align="center"><strong>GaussianDream: A Feed-Forward 3D Gaussian World Model for Robotic Manipulation</strong></h1>
+  <h3 align="center">🔥 We would appreciate it if you could star GaussianDream ⭐ and share it. Thanks! 🔥</h3>
+  <p align="center">
+    Zijian Zhang<sup>2,3,1,*</sup>&emsp;
+    Yuqing Jiang<sup>2,3,1,*</sup>&emsp;
+    Qian Cheng<sup>4</sup>&emsp;
+    Xiaofan Li<sup>5</sup>&emsp;
+    Si Liu<sup>6</sup>&emsp;
+    Ding Zhao<sup>7</sup>&emsp;
+    Ping Luo<sup>8</sup>&emsp;
+    Weitao Zhou<sup>4</sup>&emsp;
     Haibao Yu<sup>8,1,#</sup>
-  </strong>
-</p>
-
-<p align="center">
-  <sup>1</sup> Tuojing Intelligence &nbsp;&nbsp;
-  <sup>2</sup> University of Chinese Academy of Sciences &nbsp;&nbsp;
-  <sup>3</sup> Institute of Automation, Chinese Academy of Sciences
-</p>
-
-<p align="center">
-  <sup>4</sup> Tsinghua University &nbsp;&nbsp;
-  <sup>5</sup> Zhejiang University &nbsp;&nbsp;
-  <sup>6</sup> Beihang University &nbsp;&nbsp;
-  <sup>7</sup> Carnegie Mellon University &nbsp;&nbsp;
-  <sup>8</sup> The University of Hong Kong
-</p>
-
-<p align="center">
-  <em><sup>*</sup> Equal contribution &nbsp;&nbsp; <sup>#</sup> Corresponding author</em>
+    <br>
+    <sup>1</sup>Tuojing Intelligence&nbsp;&nbsp;
+    <sup>2</sup>University of Chinese Academy of Sciences&nbsp;&nbsp;
+    <sup>3</sup>Institute of Automation, Chinese Academy of Sciences
+    <br>
+    <sup>4</sup>Tsinghua University&nbsp;&nbsp;
+    <sup>5</sup>Zhejiang University&nbsp;&nbsp;
+    <sup>6</sup>Beihang University&nbsp;&nbsp;
+    <sup>7</sup>Carnegie Mellon University&nbsp;&nbsp;
+    <sup>8</sup>The University of Hong Kong
+    <br>
+    <sup>*</sup>Equal contribution&nbsp;&nbsp;
+    <sup>#</sup>Corresponding author
+  </p>
 </p>
 
 <p align="center">
@@ -106,7 +98,21 @@ For RoboCasa checkpoints, use `--policy.config gaussiandream_robocasa` and a mat
 
 ### LIBERO
 
-See `examples/libero/README.md` for setup and evaluation commands.
+See `examples/libero/README.md` for setup, training, and evaluation commands.
+
+Typical training flow:
+
+```bash
+export LIBERO_DATA_WITH_DEPTH_ROOT=<LIBERO_DATA_WITH_DEPTH_ROOT>
+export LIBERO_FLOW_ROOT=<LIBERO_FLOW_ROOT>
+export GAUSSIANDREAM_PRETRAINED_DIR=<PRETRAINED_MODEL_DIR>
+
+uv run scripts/compute_norm_stats.py --config-name gaussiandream_libero
+
+CUDA_VISIBLE_DEVICES=0 uv run scripts/train_pytorch.py \
+  gaussiandream_libero \
+  --exp-name gaussiandream_libero_run
+```
 
 Typical flow:
 
@@ -117,7 +123,20 @@ python examples/libero/main.py --args.task-suite-name libero_10
 
 ### RoboCasa
 
-See `examples/robocasa/README.md` for conda setup, RoboCasa assets, and rollout commands.
+See `examples/robocasa/README.md` for conda setup, training, RoboCasa assets, and rollout commands.
+
+Typical training flow:
+
+```bash
+export ROBOCASA_H50_ROOT=<ROBOCASA_H50_ROOT>
+export GAUSSIANDREAM_PRETRAINED_DIR=<PRETRAINED_MODEL_DIR>
+
+uv run scripts/compute_norm_stats.py --config-name gaussiandream_robocasa
+
+CUDA_VISIBLE_DEVICES=0 uv run scripts/train_pytorch.py \
+  gaussiandream_robocasa \
+  --exp-name gaussiandream_robocasa_run
+```
 
 Typical flow:
 
@@ -164,6 +183,40 @@ uv run scripts/serve_policy.py \
 ```
 
 ## Experiments
+
+### Training
+
+GaussianDream currently exposes three main training configs:
+
+- `gaussiandream_libero`: LIBERO simulation training with Gaussian/world-model supervision.
+- `gaussiandream_robocasa`: RoboCasa H50 training initialized from the LIBERO PyTorch checkpoint.
+- `gaussiandream_aloha`: real-robot / ALOHA fine-tuning on your converted LeRobot dataset.
+
+The common pattern is:
+
+```bash
+uv run scripts/compute_norm_stats.py --config-name <config_name>
+CUDA_VISIBLE_DEVICES=0 uv run scripts/train_pytorch.py <config_name> --exp-name <run_name>
+```
+
+Current environment variables expected by the released configs:
+
+```bash
+export GAUSSIANDREAM_PRETRAINED_DIR=<PRETRAINED_MODEL_DIR>
+export LIBERO_DATA_WITH_DEPTH_ROOT=<LIBERO_DATA_WITH_DEPTH_ROOT>
+export LIBERO_FLOW_ROOT=<LIBERO_FLOW_ROOT>
+export ROBOCASA_H50_ROOT=<ROBOCASA_H50_ROOT>
+export GAUSSIANDREAM_ALOHA_CKPT_DIR=<ALOHA_CKPT_ROOT>
+export GAUSSIANDREAM_ALOHA_CKPT_DIR_TORCH=<ALOHA_CKPT_ROOT_TORCH>
+export HF_LEROBOT_HOME=<LEROBOT_ROOT>
+```
+
+The released `gaussiandream_robocasa` config currently expects the initialization file
+`$GAUSSIANDREAM_PRETRAINED_DIR/pi05_libero.safetensors`, so the recommended order is:
+
+1. train or place the LIBERO PyTorch checkpoint first;
+2. fine-tune RoboCasa from that checkpoint;
+3. serve the resulting checkpoint with `scripts/serve_policy.py` for evaluation.
 
 ## Release status
 
