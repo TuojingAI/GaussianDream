@@ -2,22 +2,6 @@
 <p align="center">
   <h1 align="center"><strong>GaussianDream: A Feed-Forward 3D Gaussian World Model for Robotic Manipulation</strong></h1>
   <h3 align="center">🔥 We would appreciate it if you could star GaussianDream ⭐ and share it. Thanks! 🔥</h3>
-  <p align="center">
-    Zijian Zhang<sup>*</sup>&emsp;
-    Yuqing Jiang<sup>*</sup>&emsp;
-    Qian Cheng&emsp;
-    Xiaofan Li&emsp;
-    Si Liu&emsp;
-    Ding Zhao&emsp;
-    Ping Luo&emsp;
-    Weitao Zhou&emsp;
-    Haibao Yu<sup>#</sup>
-  </p>
-</p>
-
-<p>
-  <sup>*</sup> Equal contribution<br>
-  <sup>#</sup> Corresponding author
 </p>
 
 <p align="center">
