@@ -57,6 +57,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+.ruff_cache/
 cover/
 
 # Translations
@@ -132,6 +133,9 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.agents/
+.codex/
+.sixth/
 env/
 venv/
 ENV/
@@ -196,6 +200,7 @@ uv_venv/
 
 
 third_party/AD-FFgsStudio/diff-gaussian-rasterization/build/
+third_party/*
 
 # Downloaded simulator assets.
 third_party/robocasa/robocasa/models/assets/fixtures/

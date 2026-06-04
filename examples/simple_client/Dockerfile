@@ -22,11 +22,11 @@ ENV UV_PROJECT_ENVIRONMENT=/.venv
 # The rest of the project is mounted as a volume, so we don't need to rebuild on changes.
 # This strategy is best for development-style usage.
 COPY ./examples/simple_client/requirements.txt /tmp/requirements.txt
-COPY ./openpi-client/pyproject.toml /tmp/openpi-client/pyproject.toml
+COPY ./gaussiandream-client/pyproject.toml /tmp/gaussiandream-client/pyproject.toml
 
 # Install python dependencies.
 RUN uv venv --python 3.11.9 $UV_PROJECT_ENVIRONMENT
-RUN uv pip sync /tmp/requirements.txt /tmp/openpi-client/pyproject.toml
-ENV PYTHONPATH=/app:/app/src:/app/openpi-client/src
+RUN uv pip sync /tmp/requirements.txt /tmp/gaussiandream-client/pyproject.toml
+ENV PYTHONPATH=/app:/app/src:/app/gaussiandream-client/src
 
 CMD /bin/bash -c "source /.venv/bin/activate && python examples/simple_client/main.py $SERVER_ARGS"

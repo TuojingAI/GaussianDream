@@ -1,7 +1,7 @@
 from typing_extensions import override
 
-from openpi_client import base_policy as _base_policy
-from openpi_client.runtime import agent as _agent
+from gaussiandream_client import base_policy as _base_policy
+from gaussiandream_client.runtime import agent as _agent
 
 
 class PolicyAgent(_agent.Agent):

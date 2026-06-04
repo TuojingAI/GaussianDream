@@ -568,6 +568,48 @@ class LeRobotDROIDDataConfig(DataConfigFactory):
 
 
 @dataclasses.dataclass(frozen=True)
+class LeRobotCustomDataConfig(DataConfigFactory):
+    """Config for a custom single-arm LeRobot dataset with one base and one wrist camera."""
+
+    @override
+    def create(self, assets_dirs: pathlib.Path, model_config: _model.BaseModelConfig) -> DataConfig:
+        repack_transform = _transforms.Group(
+            inputs=[
+                _transforms.RepackTransform(
+                    {
+                        "image": {
+                            "base_0_rgb": "observation.images.cam_high",
+                            "left_wrist_0_rgb": "observation.images.cam_left_wrist",
+                            # Mirror the single wrist stream into the right slot so the policy still receives 3 views.
+                            "right_wrist_0_rgb": "observation.images.cam_left_wrist",
+                        },
+                        "state": "observation.state",
+                        "actions": "action",
+                        "prompt": "task",
+                    }
+                )
+            ]
+        )
+
+    # Custom ALOHA datasets often store absolute joint targets. Convert only the 6 arm joints to deltas
+        # and keep the gripper command absolute to match the PI training convention.
+        delta_action_mask = _transforms.make_bool_mask(6, -1)
+        data_transforms = _transforms.Group().push(
+            inputs=[_transforms.DeltaActions(delta_action_mask)],
+            outputs=[_transforms.AbsoluteActions(delta_action_mask)],
+        )
+        model_transforms = ModelTransformFactory()(model_config)
+
+        return dataclasses.replace(
+            self.create_base_config(assets_dirs, model_config),
+            repack_transforms=repack_transform,
+            data_transforms=data_transforms,
+            model_transforms=model_transforms,
+            action_sequence_keys=("action",),
+        )
+
+
+@dataclasses.dataclass(frozen=True)
 class TrainConfig:
     # Name of the config. Must be unique. Will be used to reference this config.
     name: tyro.conf.Suppress[str]
@@ -662,14 +704,15 @@ class TrainConfig:
     @property
     def assets_dirs(self) -> pathlib.Path:
         """Get the assets directory for this config."""
-        return (pathlib.Path(self.assets_base_dir) / self.name).resolve()
+        return (pathlib.Path(_expand_path(self.assets_base_dir) or self.assets_base_dir) / self.name).resolve()
 
     @property
     def checkpoint_dir(self) -> pathlib.Path:
         """Get the checkpoint directory for this config."""
         if not self.exp_name:
             raise ValueError("--exp_name must be set")
-        return (pathlib.Path(self.checkpoint_base_dir) / self.name / self.exp_name).resolve()
+        checkpoint_base = _expand_path(self.checkpoint_base_dir) or self.checkpoint_base_dir
+        return (pathlib.Path(checkpoint_base) / self.name / self.exp_name).resolve()
 
     @property
     def trainable_filter(self) -> nnx.filterlib.Filter:
@@ -1284,6 +1327,59 @@ _CONFIGS = [
         exp_name="debug_pi05",
         wandb_enabled=False,
     ),
+    #
+    # Custom ALOHA hardware configs.
+    #
+    TrainConfig(
+        name="gaussiandream_aloha_demo",
+        model=pi0_config.Pi0Config(action_dim=7),
+        data=LeRobotCustomDataConfig(
+            repo_id="local/put_green_square",
+        ),
+        batch_size=8,
+        num_train_steps=20_000,
+        exp_name="gaussiandream_aloha_demo_run",
+        checkpoint_base_dir="${GAUSSIANDREAM_ALOHA_CKPT_DIR}",
+    ),
+    TrainConfig(
+        name="gaussiandream_aloha_jax",
+        model=pi0_config.Pi0Config(action_dim=7),
+        data=LeRobotCustomDataConfig(
+            repo_id="local/gaussiandream_aloha",
+        ),
+        batch_size=8,
+        num_train_steps=20_000,
+        exp_name="gaussiandream_aloha_jax_run",
+        checkpoint_base_dir="${GAUSSIANDREAM_ALOHA_CKPT_DIR}",
+    ),
+    TrainConfig(
+        name="gaussiandream_aloha_torch",
+        model=pi0_config.Pi0Config(action_dim=7),
+        data=LeRobotCustomDataConfig(
+            repo_id="local/gaussiandream_aloha",
+        ),
+        pytorch_weight_path="${GAUSSIANDREAM_PRETRAINED_DIR}/pi0_base_pytorch",
+        batch_size=16,
+        num_train_steps=20_000,
+        log_interval=20,
+        save_interval=1000,
+        exp_name="gaussiandream_aloha_torch_run",
+        checkpoint_base_dir="${GAUSSIANDREAM_ALOHA_CKPT_DIR_TORCH}",
+    ),
+    TrainConfig(
+        name="gaussiandream_aloha",
+        model=pi0_config.Pi0Config(pi05=True, discrete_state_input=False),
+        data=LeRobotCustomDataConfig(
+            repo_id="local/gaussiandream_aloha",
+        ),
+        pytorch_weight_path="${GAUSSIANDREAM_PRETRAINED_DIR}/pi05_base_pytorch",
+        batch_size=16,
+        num_train_steps=20_000,
+        log_interval=20,
+        save_interval=5000,
+        exp_name="gaussiandream_aloha_run",
+        checkpoint_base_dir="${GAUSSIANDREAM_ALOHA_CKPT_DIR_TORCH}",
+    ),
     # RoboArena & PolaRiS configs.
     *roboarena_config.get_roboarena_configs(),
     *polaris_config.get_polaris_configs(),
@@ -1299,6 +1395,11 @@ def _alias_config(source_name: str, alias_name: str) -> TrainConfig:
 
 _CONFIGS.extend(
     [
+        _alias_config("pi05_aloha", "gaussiandream_aloha_base"),
+        _alias_config("gaussiandream_aloha_demo", "my_real_data_config"),
+        _alias_config("gaussiandream_aloha_jax", "my_real_data_0416_config"),
+        _alias_config("gaussiandream_aloha_torch", "my_real_data_0416_pytorch_config"),
+        _alias_config("gaussiandream_aloha", "my_real_data_0416_pi05_pytorch_config"),
         _alias_config("pi05_libero", "gaussiandream_libero"),
         _alias_config("pi05_robocasa", "gaussiandream_robocasa"),
         _alias_config("pi05_robocasa_depth", "gaussiandream_robocasa_depth"),

@@ -22,9 +22,11 @@ cd <GAUSSIANDREAM_ROOT>
 Install client-side dependencies:
 
 ```bash
+git clone https://github.com/robocasa/robocasa.git third_party/robocasa
+git clone https://github.com/ARISE-Initiative/robosuite.git third_party/robosuite
 pip install -r examples/robocasa/requirements.in
 pip install -e third_party/robocasa
-pip install -e openpi-client
+pip install -e gaussiandream-client
 ```
 
 Download RoboCasa kitchen assets:
@@ -43,7 +45,7 @@ export MUJOCO_GL=egl
 Quick check:
 
 ```bash
-python -c "import mujoco, robocasa, robosuite, openpi_client, tyro; print('all ok')"
+python -c "import mujoco, robocasa, robosuite, gaussiandream_client, tyro; print('all ok')"
 ```
 
 ## Environment sanity check

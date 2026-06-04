@@ -7,7 +7,7 @@ This directory contains the GaussianDream LIBERO evaluation clients and robustne
 From the repository root:
 
 ```bash
-git submodule update --init --recursive
+git clone https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/libero
 uv sync
 ```
 
@@ -19,7 +19,7 @@ source examples/libero/.venv/bin/activate
 uv pip sync examples/libero/requirements.txt third_party/libero/requirements.txt \
   --extra-index-url https://download.pytorch.org/whl/cu113 \
   --index-strategy=unsafe-best-match
-uv pip install -e openpi-client
+uv pip install -e gaussiandream-client
 uv pip install -e third_party/libero
 export PYTHONPATH=$PWD/src:$PWD/third_party/libero:$PYTHONPATH
 ```

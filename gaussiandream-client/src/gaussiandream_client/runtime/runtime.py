@@ -2,9 +2,9 @@ import logging
 import threading
 import time
 
-from openpi_client.runtime import agent as _agent
-from openpi_client.runtime import environment as _environment
-from openpi_client.runtime import subscriber as _subscriber
+from gaussiandream_client.runtime import agent as _agent
+from gaussiandream_client.runtime import environment as _environment
+from gaussiandream_client.runtime import subscriber as _subscriber
 
 
 class Runtime:

@@ -4,7 +4,7 @@ import numpy as np
 import tree
 from typing_extensions import override
 
-from openpi_client import base_policy as _base_policy
+from gaussiandream_client import base_policy as _base_policy
 
 
 class ActionChunkBroker(_base_policy.BasePolicy):

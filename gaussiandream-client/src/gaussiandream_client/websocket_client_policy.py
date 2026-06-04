@@ -5,8 +5,8 @@ from typing import Dict, Optional, Tuple
 from typing_extensions import override
 import websockets.sync.client
 
-from openpi_client import base_policy as _base_policy
-from openpi_client import msgpack_numpy
+from gaussiandream_client import base_policy as _base_policy
+from gaussiandream_client import msgpack_numpy
 
 
 class WebsocketClientPolicy(_base_policy.BasePolicy):

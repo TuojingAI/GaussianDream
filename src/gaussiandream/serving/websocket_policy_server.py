@@ -4,8 +4,8 @@ import logging
 import time
 import traceback
 
-from openpi_client import base_policy as _base_policy
-from openpi_client import msgpack_numpy
+from gaussiandream_client import base_policy as _base_policy
+from gaussiandream_client import msgpack_numpy
 import websockets.asyncio.server as _server
 import websockets.frames
 

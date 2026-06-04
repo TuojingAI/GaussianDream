@@ -1,6 +1,6 @@
 import numpy as np
 
-import openpi_client.image_tools as image_tools
+import gaussiandream_client.image_tools as image_tools
 
 
 def test_resize_with_pad_shapes():

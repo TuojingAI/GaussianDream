@@ -36,11 +36,11 @@ ENV UV_PROJECT_ENVIRONMENT=/.venv
 
 # Copy the requirements files so we can install dependencies.
 COPY ./examples/robocasa/requirements.txt /tmp/requirements.txt
-COPY ./openpi-client/pyproject.toml /tmp/openpi-client/pyproject.toml
+COPY ./gaussiandream-client/pyproject.toml /tmp/gaussiandream-client/pyproject.toml
 
 # Install python dependencies.
 RUN uv venv --python 3.10 $UV_PROJECT_ENVIRONMENT
-RUN uv pip sync /tmp/requirements.txt /tmp/openpi-client/pyproject.toml --extra-index-url https://download.pytorch.org/whl/cu113 --index-strategy=unsafe-best-match
+RUN uv pip sync /tmp/requirements.txt /tmp/gaussiandream-client/pyproject.toml --extra-index-url https://download.pytorch.org/whl/cu113 --index-strategy=unsafe-best-match
 
-# Set PYTHONPATH to include the app, openpi-client, and robocasa
-ENV PYTHONPATH=/app:/app/openpi-client/src:/app/third_party/robocasa
+# Set PYTHONPATH to include the app, gaussiandream-client, and robocasa
+ENV PYTHONPATH=/app:/app/gaussiandream-client/src:/app/third_party/robocasa

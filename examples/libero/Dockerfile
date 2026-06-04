@@ -38,12 +38,12 @@ ENV UV_PROJECT_ENVIRONMENT=/.venv
 # This strategy is best for development-style usage.
 COPY ./examples/libero/requirements.txt /tmp/requirements.txt
 COPY ./third_party/libero/requirements.txt /tmp/requirements-libero.txt
-COPY ./openpi-client/pyproject.toml /tmp/openpi-client/pyproject.toml
+COPY ./gaussiandream-client/pyproject.toml /tmp/gaussiandream-client/pyproject.toml
 
 # Install python dependencies.
 RUN uv venv --python 3.8 $UV_PROJECT_ENVIRONMENT
-RUN uv pip sync /tmp/requirements.txt /tmp/requirements-libero.txt /tmp/openpi-client/pyproject.toml --extra-index-url https://download.pytorch.org/whl/cu113 --index-strategy=unsafe-best-match
-ENV PYTHONPATH=/app:/app/openpi-client/src:/app/third_party/libero
+RUN uv pip sync /tmp/requirements.txt /tmp/requirements-libero.txt /tmp/gaussiandream-client/pyproject.toml --extra-index-url https://download.pytorch.org/whl/cu113 --index-strategy=unsafe-best-match
+ENV PYTHONPATH=/app:/app/gaussiandream-client/src:/app/third_party/libero
 
 # Create a default config file to avoid an input prompt from LIBERO's init script.
 # https://github.com/Lifelong-Robot-Learning/LIBERO/blob/master/libero/libero/__init__.py

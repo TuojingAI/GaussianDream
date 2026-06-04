@@ -14,7 +14,7 @@
 <p align="center">
 
 [![Code](https://img.shields.io/badge/Code-GitHub-black)](https://github.com/TuojingAI/GaussianDream)&nbsp;
-[![Paper](https://img.shields.io/badge/Paper-Coming%20Soon-red)](#release-status)&nbsp;
+[![Paper](https://img.shields.io/badge/Paper-arXiv-red)](https://arxiv.org/pdf/2605.20752v2)&nbsp;
 [![Release](https://img.shields.io/badge/Release-Coming%20Soon-blue)](#release-status)
 
 </p>
@@ -34,11 +34,20 @@ GaussianDream is a feed-forward 3D Gaussian world model for robotic manipulation
 ```bash
 git clone https://github.com/TuojingAI/GaussianDream.git
 cd GaussianDream
-git submodule update --init --recursive
 uv sync
 ```
 
 The package metadata and implementation import namespace are both `gaussiandream`.
+
+Third-party simulators and hardware stacks are not vendored in this repo. Please clone them yourself under `third_party/` before running the corresponding track:
+
+```bash
+mkdir -p third_party
+git clone https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/libero
+git clone https://github.com/robocasa/robocasa.git third_party/robocasa
+git clone https://github.com/ARISE-Initiative/robosuite.git third_party/robosuite
+git clone https://github.com/Physical-Intelligence/aloha.git third_party/aloha
+```
 
 Optional cache paths:
 
@@ -54,7 +63,7 @@ export DATA_ROOT=<DATA_ROOT>
 
 GaussianDream includes three evaluation paths:
 
-- real-robot / runtime clients built around the shared policy server and `openpi-client`
+- real-robot / runtime clients built around the shared policy server and `gaussiandream-client`
 - LIBERO simulation evaluation in `examples/libero/`
 - RoboCasa simulation evaluation in `examples/robocasa/`
 
@@ -103,11 +112,37 @@ python examples/robocasa/main.py \
 
 For RoboCasa H50 temporal evaluation, use `examples/robocasa/eval_h50_temporal.py` after installing the RoboCasa client environment.
 
+### Real Robot
+
+See `examples/aloha_real/README.md` for the ALOHA hardware runtime, dataset conversion flow, and training examples.
+
+Typical data pipeline:
+
+```bash
+python scripts/run_real_robot_pipeline.py \
+  --raw-dir <RAW_PICKLE_DIR> \
+  --lerobot-root <LEROBOT_ROOT> \
+  --repo-id local/gaussiandream_aloha \
+  --config-name gaussiandream_aloha \
+  --exp-name gaussiandream_aloha_run
+```
+
+Typical serving flow for a trained ALOHA checkpoint:
+
+```bash
+uv run scripts/serve_policy.py \
+  --env ALOHA \
+  --port 8000 \
+  policy:checkpoint \
+  --policy.config gaussiandream_aloha \
+  --policy.dir <ALOHA_CKPT_DIR>/gaussiandream_aloha/<exp>/<step>
+```
+
 ## Experiments
 
 ## Release status
 
-Paper, checkpoints, datasets, and complete reproduction instructions are coming soon. Large artifacts such as datasets, checkpoints, rendered videos, logs, and experiment outputs are intentionally not tracked in git.
+Checkpoints, datasets, and complete reproduction instructions are coming soon. Large artifacts such as datasets, checkpoints, rendered videos, logs, and experiment outputs are intentionally not tracked in git.
 
 ## Contact
 
@@ -129,7 +164,8 @@ If you find this work useful in your research, please cite:
 ```bibtex
 @article{zhang2026gaussiandream,
   title={GaussianDream: A Feed-Forward 3D Gaussian World Model for Robotic Manipulation},
-  author={Zhang, Zijian and Jiang, Yuqing and Cheng, Qian and Liu, Si and Zhao, Ding and Luo, Ping and Zhou, Weitao and Yu, Haibao},
+  author={Zhang, Zijian and Jiang, Yuqing and Cheng, Qian and Li, Xiaofan and Liu, Si and Zhao, Ding and Luo, Ping and Zhou, Weitao and Yu, Haibao},
+  journal={arXiv preprint arXiv:2605.20752},
   year={2026}
 }
 ```

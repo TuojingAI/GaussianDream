@@ -1,4 +1,4 @@
-from openpi_client import action_chunk_broker
+from gaussiandream_client import action_chunk_broker
 import pytest
 
 from gaussiandream.policies import aloha_policy

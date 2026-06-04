@@ -20,8 +20,8 @@ import pickle
 
 import imageio
 import numpy as np
-from openpi_client import image_tools
-from openpi_client import websocket_client_policy as _websocket_client_policy
+from gaussiandream_client import image_tools
+from gaussiandream_client import websocket_client_policy as _websocket_client_policy
 import tqdm
 import tyro
 

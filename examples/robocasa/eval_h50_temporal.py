@@ -12,7 +12,7 @@ from typing import Any
 
 import imageio
 import numpy as np
-from openpi_client import websocket_client_policy as _websocket_client_policy
+from gaussiandream_client import websocket_client_policy as _websocket_client_policy
 
 
 OFFICIAL_LAYOUT_AND_STYLE_IDS: tuple[tuple[int, int], ...] = (

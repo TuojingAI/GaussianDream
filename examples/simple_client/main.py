@@ -5,7 +5,7 @@ import pathlib
 import time
 
 import numpy as np
-from openpi_client import websocket_client_policy as _websocket_client_policy
+from gaussiandream_client import websocket_client_policy as _websocket_client_policy
 import polars as pl
 import rich
 import tqdm
