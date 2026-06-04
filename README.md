@@ -12,20 +12,23 @@
     Ping Luo<sup>8</sup>&emsp;
     Weitao Zhou<sup>4</sup>&emsp;
     Haibao Yu<sup>8,1,#</sup>
-    <br>
-    <sup>1</sup>Tuojing Intelligence&nbsp;&nbsp;
-    <sup>2</sup>University of Chinese Academy of Sciences&nbsp;&nbsp;
-    <sup>3</sup>Institute of Automation, Chinese Academy of Sciences
-    <br>
-    <sup>4</sup>Tsinghua University&nbsp;&nbsp;
-    <sup>5</sup>Zhejiang University&nbsp;&nbsp;
-    <sup>6</sup>Beihang University&nbsp;&nbsp;
-    <sup>7</sup>Carnegie Mellon University&nbsp;&nbsp;
-    <sup>8</sup>The University of Hong Kong
-    <br>
-    <sup>*</sup>Equal contribution&nbsp;&nbsp;
-    <sup>#</sup>Corresponding author
   </p>
+</p>
+
+<p>
+  <sup>1</sup> Tuojing Intelligence<br>
+  <sup>2</sup> University of Chinese Academy of Sciences<br>
+  <sup>3</sup> Institute of Automation, Chinese Academy of Sciences<br>
+  <sup>4</sup> Tsinghua University<br>
+  <sup>5</sup> Zhejiang University<br>
+  <sup>6</sup> Beihang University<br>
+  <sup>7</sup> Carnegie Mellon University<br>
+  <sup>8</sup> The University of Hong Kong
+</p>
+
+<p>
+  <sup>*</sup> Equal contribution<br>
+  <sup>#</sup> Corresponding author
 </p>
 
 <p align="center">
