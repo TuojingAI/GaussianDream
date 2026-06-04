@@ -5,10 +5,35 @@
 </p>
 
 <p align="center">
-  Zijian Zhang<sup>2,3,1,&#42;</sup>, Yuqing Jiang<sup>2,3,1,&#42;</sup>, Qian Cheng<sup>4</sup>, Xiaofan Li<sup>5</sup>, Si Liu<sup>6</sup>, Ding Zhao<sup>7</sup>, Ping Luo<sup>8</sup>, Weitao Zhou<sup>4</sup>, Haibao Yu<sup>8,1,#</sup><br>
-  <sup>1</sup> Tuojing Intelligence &nbsp;|&nbsp; <sup>2</sup> University of Chinese Academy of Sciences &nbsp;|&nbsp; <sup>3</sup> Institute of Automation, Chinese Academy of Sciences<br>
-  <sup>4</sup> Tsinghua University &nbsp;|&nbsp; <sup>5</sup> Zhejiang University &nbsp;|&nbsp; <sup>6</sup> Beihang University &nbsp;|&nbsp; <sup>7</sup> Carnegie Mellon University &nbsp;|&nbsp; <sup>8</sup> The University of Hong Kong<br>
-  <sup>&#42;</sup> Equal contribution &nbsp;|&nbsp; <sup>#</sup> Corresponding author
+  <strong>
+    Zijian Zhang<sup>2,3,1,*</sup> &nbsp;|&nbsp;
+    Yuqing Jiang<sup>2,3,1,*</sup> &nbsp;|&nbsp;
+    Qian Cheng<sup>4</sup> &nbsp;|&nbsp;
+    Xiaofan Li<sup>5</sup> &nbsp;|&nbsp;
+    Si Liu<sup>6</sup> &nbsp;|&nbsp;
+    Ding Zhao<sup>7</sup> &nbsp;|&nbsp;
+    Ping Luo<sup>8</sup> &nbsp;|&nbsp;
+    Weitao Zhou<sup>4</sup> &nbsp;|&nbsp;
+    Haibao Yu<sup>8,1,#</sup>
+  </strong>
+</p>
+
+<p align="center">
+  <sup>1</sup> Tuojing Intelligence &nbsp;&nbsp;
+  <sup>2</sup> University of Chinese Academy of Sciences &nbsp;&nbsp;
+  <sup>3</sup> Institute of Automation, Chinese Academy of Sciences
+</p>
+
+<p align="center">
+  <sup>4</sup> Tsinghua University &nbsp;&nbsp;
+  <sup>5</sup> Zhejiang University &nbsp;&nbsp;
+  <sup>6</sup> Beihang University &nbsp;&nbsp;
+  <sup>7</sup> Carnegie Mellon University &nbsp;&nbsp;
+  <sup>8</sup> The University of Hong Kong
+</p>
+
+<p align="center">
+  <em><sup>*</sup> Equal contribution &nbsp;&nbsp; <sup>#</sup> Corresponding author</em>
 </p>
 
 <p align="center">
