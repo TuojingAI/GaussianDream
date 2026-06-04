@@ -3,27 +3,16 @@
   <h1 align="center"><strong>GaussianDream: A Feed-Forward 3D Gaussian World Model for Robotic Manipulation</strong></h1>
   <h3 align="center">🔥 We would appreciate it if you could star GaussianDream ⭐ and share it. Thanks! 🔥</h3>
   <p align="center">
-    Zijian Zhang<sup>2,3,1,*</sup>&emsp;
-    Yuqing Jiang<sup>2,3,1,*</sup>&emsp;
-    Qian Cheng<sup>4</sup>&emsp;
-    Xiaofan Li<sup>5</sup>&emsp;
-    Si Liu<sup>6</sup>&emsp;
-    Ding Zhao<sup>7</sup>&emsp;
-    Ping Luo<sup>8</sup>&emsp;
-    Weitao Zhou<sup>4</sup>&emsp;
-    Haibao Yu<sup>8,1,#</sup>
+    Zijian Zhang<sup>*</sup>&emsp;
+    Yuqing Jiang<sup>*</sup>&emsp;
+    Qian Cheng&emsp;
+    Xiaofan Li&emsp;
+    Si Liu&emsp;
+    Ding Zhao&emsp;
+    Ping Luo&emsp;
+    Weitao Zhou&emsp;
+    Haibao Yu<sup>#</sup>
   </p>
-</p>
-
-<p>
-  <sup>1</sup> Tuojing Intelligence<br>
-  <sup>2</sup> University of Chinese Academy of Sciences<br>
-  <sup>3</sup> Institute of Automation, Chinese Academy of Sciences<br>
-  <sup>4</sup> Tsinghua University<br>
-  <sup>5</sup> Zhejiang University<br>
-  <sup>6</sup> Beihang University<br>
-  <sup>7</sup> Carnegie Mellon University<br>
-  <sup>8</sup> The University of Hong Kong
 </p>
 
 <p>
