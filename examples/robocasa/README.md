@@ -23,11 +23,14 @@ Install client-side dependencies:
 
 ```bash
 git clone https://github.com/robocasa/robocasa.git third_party/robocasa
+git -C third_party/robocasa checkout 756598a5
 git clone https://github.com/ARISE-Initiative/robosuite.git third_party/robosuite
 pip install -r examples/robocasa/requirements.in
 pip install -e third_party/robocasa
 pip install -e gaussiandream-client
 ```
+
+RoboCasa v0.2 upstream docs recommend using the `master` branch of `robosuite`.
 
 Download RoboCasa kitchen assets:
 

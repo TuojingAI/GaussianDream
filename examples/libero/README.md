@@ -8,6 +8,7 @@ From the repository root:
 
 ```bash
 git clone https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/libero
+git -C third_party/libero checkout f78abd6
 uv sync
 ```
 

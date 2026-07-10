@@ -26,6 +26,8 @@ Clone the ROS package into `third_party/aloha` before using this flow:
 git clone https://github.com/Physical-Intelligence/aloha.git third_party/aloha
 ```
 
+If you need stricter reproducibility for hardware bring-up, pin a tested ALOHA commit in your local setup notes as well.
+
 ## Client environment
 
 Create a dedicated Python 3.10 environment for the hardware client:

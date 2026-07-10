@@ -28,19 +28,45 @@ GaussianDream is a feed-forward 3D Gaussian world model for robotic manipulation
 git clone https://github.com/TuojingAI/GaussianDream.git
 cd GaussianDream
 uv sync
+uv pip install -e third_party/AD-FFgsStudio/diff-gaussian-rasterization
 ```
 
 The package metadata and implementation import namespace are both `gaussiandream`.
 
-Third-party simulators and hardware stacks are not vendored in this repo. Please clone them yourself under `third_party/` before running the corresponding track:
+`third_party/AD-FFgsStudio` is bundled in this repository because the Gaussian feature encoder / renderer imports it directly at runtime. This release intentionally includes code only; generated `build/` artifacts, logs, checkpoints, and datasets are excluded from git.
+
+If you see `GaussianRasterizer not available`, the CUDA extension was not compiled successfully. Re-run:
+
+```bash
+uv pip install -e third_party/AD-FFgsStudio/diff-gaussian-rasterization
+```
+
+Other simulators and hardware stacks are not vendored in this repo. Please clone them yourself under `third_party/` before running the corresponding track:
 
 ```bash
 mkdir -p third_party
 git clone https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/libero
+git -C third_party/libero checkout f78abd6
+
 git clone https://github.com/robocasa/robocasa.git third_party/robocasa
+git -C third_party/robocasa checkout 756598a5
+
 git clone https://github.com/ARISE-Initiative/robosuite.git third_party/robosuite
 git clone https://github.com/Physical-Intelligence/aloha.git third_party/aloha
 ```
+
+Dependency summary:
+
+- bundled in repo: `third_party/AD-FFgsStudio`
+- clone manually for LIBERO: `third_party/libero` at tested commit `f78abd6`
+- clone manually for RoboCasa: `third_party/robocasa` at tested commit `756598a5`
+- clone manually for RoboCasa backend: `third_party/robosuite` from the upstream repo; RoboCasa v0.2 upstream docs recommend the `master` branch
+- clone manually for real-robot runtime: `third_party/aloha`
+
+If you want to document external dependencies in issues / README, prefer the pattern `repo link + tested commit`, for example:
+
+- `LIBERO`: `https://github.com/Lifelong-Robot-Learning/LIBERO` @ `f78abd6`
+- `RoboCasa`: `https://github.com/robocasa/robocasa` @ `756598a5`
 
 Optional cache paths:
 
@@ -158,6 +184,13 @@ uv run scripts/serve_policy.py \
   --policy.dir <ALOHA_CKPT_DIR>/gaussiandream_aloha/<exp>/<step>
 ```
 
+## Reproduction notes
+
+- This repository now includes the required `AD-FFgsStudio` source tree under `third_party/AD-FFgsStudio`.
+- Large artifacts are still not bundled: datasets, checkpoints, simulator assets, rendered outputs, and experiment logs must be prepared separately.
+- The released `gaussiandream_robocasa` config expects `$GAUSSIANDREAM_PRETRAINED_DIR/pi05_libero.safetensors`.
+- Track-specific environment setup still lives in `examples/libero/README.md`, `examples/robocasa/README.md`, and `examples/aloha_real/README.md`.
+
 ## Experiments
 
 ### Training
@@ -196,7 +229,7 @@ The released `gaussiandream_robocasa` config currently expects the initializatio
 
 ## Release status
 
-Checkpoints, datasets, and complete reproduction instructions are coming soon. Large artifacts such as datasets, checkpoints, rendered videos, logs, and experiment outputs are intentionally not tracked in git.
+The repository now includes the required Gaussian rendering source dependency `third_party/AD-FFgsStudio`, but large artifacts are still not tracked in git. Checkpoints, datasets, rendered videos, logs, and complete reproduction assets will be released separately.
 
 ## Contact
 

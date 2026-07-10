@@ -201,6 +201,8 @@ uv_venv/
 
 third_party/AD-FFgsStudio/diff-gaussian-rasterization/build/
 third_party/*
+!third_party/AD-FFgsStudio/
+!third_party/AD-FFgsStudio/**
 
 # Downloaded simulator assets.
 third_party/robocasa/robocasa/models/assets/fixtures/
