@@ -7,6 +7,7 @@ This directory contains the GaussianDream LIBERO evaluation clients and robustne
 From the repository root:
 
 ```bash
+# tested commit
 git clone https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/libero
 git -C third_party/libero checkout f78abd6
 uv sync

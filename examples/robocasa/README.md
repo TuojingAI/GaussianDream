@@ -22,6 +22,7 @@ cd <GAUSSIANDREAM_ROOT>
 Install client-side dependencies:
 
 ```bash
+# tested commit
 git clone https://github.com/robocasa/robocasa.git third_party/robocasa
 git -C third_party/robocasa checkout 756598a5
 git clone https://github.com/ARISE-Initiative/robosuite.git third_party/robosuite
@@ -30,7 +31,7 @@ pip install -e third_party/robocasa
 pip install -e gaussiandream-client
 ```
 
-RoboCasa v0.2 upstream docs recommend using the `master` branch of `robosuite`.
+Use the upstream `master` branch of `robosuite` as recommended by RoboCasa v0.2.
 
 Download RoboCasa kitchen assets:
 

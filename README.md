@@ -45,9 +45,11 @@ Other simulators and hardware stacks are not vendored in this repo. Please clone
 
 ```bash
 mkdir -p third_party
+# tested LIBERO commit
 git clone https://github.com/Lifelong-Robot-Learning/LIBERO.git third_party/libero
 git -C third_party/libero checkout f78abd6
 
+# tested RoboCasa commit
 git clone https://github.com/robocasa/robocasa.git third_party/robocasa
 git -C third_party/robocasa checkout 756598a5
 
@@ -55,18 +57,13 @@ git clone https://github.com/ARISE-Initiative/robosuite.git third_party/robosuit
 git clone https://github.com/Physical-Intelligence/aloha.git third_party/aloha
 ```
 
-Dependency summary:
+Tested external dependencies:
 
 - bundled in repo: `third_party/AD-FFgsStudio`
-- clone manually for LIBERO: `third_party/libero` at tested commit `f78abd6`
-- clone manually for RoboCasa: `third_party/robocasa` at tested commit `756598a5`
-- clone manually for RoboCasa backend: `third_party/robosuite` from the upstream repo; RoboCasa v0.2 upstream docs recommend the `master` branch
-- clone manually for real-robot runtime: `third_party/aloha`
-
-If you want to document external dependencies in issues / README, prefer the pattern `repo link + tested commit`, for example:
-
 - `LIBERO`: `https://github.com/Lifelong-Robot-Learning/LIBERO` @ `f78abd6`
 - `RoboCasa`: `https://github.com/robocasa/robocasa` @ `756598a5`
+- `robosuite`: upstream `master` branch per RoboCasa v0.2 docs
+- clone manually for real-robot runtime: `third_party/aloha`
 
 Optional cache paths:
 
